@@ -38,15 +38,15 @@ public class Application implements CommandLineRunner {
         log.info("User Name: {}", usserDao.findById(user.getId()).get().getUserName());
     }
 
-    @EventListener
-    private void processPostDeploy(PostDeployEvent event) {
-        ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
-        log.info("BusinessKey {}", loanApproval.getBusinessKey());
-        log.info("Instance Id {}", loanApproval.getCaseInstanceId());
-        log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
-        log.info("Tenant Id {}", loanApproval.getTenantId());
-
-        runtimeService.startProcessInstanceByKey("Process_1");
-
-    }
+//    @EventListener
+//    private void processPostDeploy(PostDeployEvent event) {
+//        ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
+//        log.info("BusinessKey {}", loanApproval.getBusinessKey());
+//        log.info("Instance Id {}", loanApproval.getCaseInstanceId());
+//        log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
+//        log.info("Tenant Id {}", loanApproval.getTenantId());
+//
+//        runtimeService.startProcessInstanceByKey("Process_1");
+//
+//    }
 }
