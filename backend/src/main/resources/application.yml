@@ -9,3 +9,6 @@ camunda.bpm:
 yelp:
   endpoint: https://api.yelp.com/v3
   token: hqMsgB_xwwoYGoWa-tvJsc6SFii_U6aLaBuvIdERcwEq1U0KwXJiaSRIx8LOGgudr0-kOGU9Ct7NUpOwxOvQbSW3agr2e-qCuiSH3R9t8epEbWBPrRas2a6gHirXW3Yx
+  
+thecocktaildb:
+  endpoint: https://www.thecocktaildb.com/api/json/v1/1/ 
