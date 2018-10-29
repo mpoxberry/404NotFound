@@ -1,3 +1,4 @@
+import { FoodService } from './food.service';
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,15 +18,18 @@ export class HomeComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   genres: GenreResponse[];
+  foods: Object[];
   movies: Object;
 
-  constructor(private _formBuilder: FormBuilder, private movieService: MovieService) {
+  constructor(private _formBuilder: FormBuilder, private movieService: MovieService, private foodService: FoodService) {
     this.loadGenres();
+    this.loadFoods();
   }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      food: [''],
+      movie: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
@@ -36,6 +40,10 @@ export class HomeComponent implements OnInit {
     this.movieService.getGenreList().subscribe((res: GenreResponse[]) => {
       this.genres = res['genres'];
     });
+  }
+
+  loadFoods() {
+    this.foods = this.foodService.getRestaurants();
   }
 
   loadMovies() {

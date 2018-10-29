@@ -5,7 +5,7 @@
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Select a movie genre or food type</ng-template>
           <mat-form-field class="dropdown">
-            <mat-select #selectGenre [disabled]="selectFood.value != null" placeholder="Genre">
+            <mat-select #selectGenre formControlName="movie" [disabled]="selectFood.value != null" placeholder="Genre">
               <mat-option [value]=""></mat-option>
               <mat-option *ngFor="let genre of genres" [value]="genre.id">
                 {{genre.name}}
@@ -14,10 +14,11 @@
           </mat-form-field>
           <h3 style="display: inline; padding-left: 30px; padding-right: 30px;">OR</h3>
           <mat-form-field class="dropdown">
-            <mat-select #selectFood [disabled]="selectGenre.value != null" class="dropdown" placeholder="Food Type">
+            <mat-select #selectFood formControlName="food" [disabled]="selectGenre.value != null" class="dropdown"
+              placeholder="Food Type">
               <mat-option [value]=""></mat-option>
-              <mat-option *ngFor="let genre of genres" [value]="genre.id">
-                {{genre.name}}
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.name}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -29,8 +30,14 @@
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
           <ng-template matStepLabel>Fill out your address</ng-template>
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
+          <mat-form-field class="dropdown">
+            <mat-select #selectFood formControlName="food" [disabled]="selectGenre.value != null" class="dropdown"
+              placeholder="Food Type">
+              <mat-option [value]=""></mat-option>
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.name}}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <div>
             <button mat-button matStepperPrevious>Back</button>
