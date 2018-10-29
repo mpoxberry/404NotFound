@@ -6,7 +6,9 @@ import { Shell } from '@app/shell/shell.service';
 import { LandingPageComponent } from './landing-page.component';
 
 const routes: Routes = [
-  Shell.childRoutes([{ path: 'landing-page', component: LandingPageComponent, data: { title: extract('Landing Page') } }])
+  Shell.childRoutes([
+    { path: 'landing-page', component: LandingPageComponent, data: { title: extract('Landing Page') } }
+  ])
 ];
 
 @NgModule({

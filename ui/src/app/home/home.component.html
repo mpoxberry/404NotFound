@@ -1,14 +1,51 @@
 <div class="container">
   <mat-card>
-    <p>
-      <img class="logo" src="assets/ngx-rocket-logo.png" alt="angular logo"/>
-    </p>
-    <mat-card-content>
-      <mat-card-title translate>Hello world !</mat-card-title>
-      <mat-card-subtitle>
-        <app-loader [isLoading]="isLoading" size="1.5"></app-loader>
-        <q [hidden]="isLoading">{{quote}}</q>
-      </mat-card-subtitle>
-    </mat-card-content>
+    <mat-vertical-stepper [linear]="false" #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Select a movie genre or food type</ng-template>
+          <mat-form-field class="dropdown">
+            <mat-select #selectGenre [disabled]="selectFood.value != null" placeholder="Genre">
+              <mat-option [value]=""></mat-option>
+              <mat-option *ngFor="let genre of genres" [value]="genre.id">
+                {{genre.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <h3 style="display: inline; padding-left: 30px; padding-right: 30px;">OR</h3>
+          <mat-form-field class="dropdown">
+            <mat-select #selectFood [disabled]="selectGenre.value != null" class="dropdown" placeholder="Food Type">
+              <mat-option [value]=""></mat-option>
+              <mat-option *ngFor="let genre of genres" [value]="genre.id">
+                {{genre.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Fill out your address</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Address" formControlName="secondCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
   </mat-card>
 </div>
