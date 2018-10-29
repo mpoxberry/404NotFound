@@ -1,0 +1,22 @@
+{
+  "generator-ngx-rocket": {
+    "version": "5.2.0",
+    "props": {
+      "location": "path",
+      "appName": "name-not-found-ui",
+      "target": [
+        "web"
+      ],
+      "pwa": true,
+      "ui": "material",
+      "layout": "simple",
+      "auth": false,
+      "lazy": false,
+      "angulartics": false,
+      "prettier": true,
+      "projectName": "name-not-found-ui",
+      "packageManager": "npm",
+      "mobile": []
+    }
+  }
+}
