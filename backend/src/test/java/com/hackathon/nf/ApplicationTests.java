@@ -1,4 +1,4 @@
-package com.example.NotFoundmaster;
+package com.hackathon.nf;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
