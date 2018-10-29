@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,9 @@ public class MovieController {
     
     @Value("${tmdb.endpoint}")
     String endpoint;
+    
+    @Value("${tmdb.image-endpoint}")
+    String imageEndpoint;
 
     @RequestMapping("/genres")
     public String genres() {
@@ -45,6 +49,16 @@ public class MovieController {
                 .queryParam("with_genres", genres)
                 .queryParam("with_keywords", keywords)
                 .queryParam("sort_by", sort);
+        
+        HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
+        
+        HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+        return response.getBody();
+    }
+    
+    @RequestMapping("/image/{url}")
+    public String image(@PathVariable("url") String url) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(imageEndpoint + url);
         
         HttpEntity<?> entity = new HttpEntity<>(new HttpHeaders());
         
