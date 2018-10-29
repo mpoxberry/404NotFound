@@ -1,44 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1o086v1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1o086v1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="2.0.3">
   <bpmn:process id="Process_1" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1" name="Payment Retrieval Requested">
       <bpmn:outgoing>SequenceFlow_165tjek</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_165tjek" sourceRef="StartEvent_1" targetRef="Task_01em9hs" />
-    <bpmn:serviceTask id="Task_01em9hs" name="Charge Credit Card" camunda:class="com.hackathon.nf.delegates.Hello">
-      <bpmn:incoming>SequenceFlow_165tjek</bpmn:incoming>
+    <bpmn:sequenceFlow id="SequenceFlow_165tjek" sourceRef="StartEvent_1" targetRef="EnterName" />
+    <bpmn:serviceTask id="SayHellp" name="Charge Credit Card" camunda:class="com.hackathon.nf.delegates.Hello">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="text1">$(name)</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_14ybrav</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0x0xqrv</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:endEvent id="EndEvent_1jq05om" name="Payment Received">
       <bpmn:incoming>SequenceFlow_0x0xqrv</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0x0xqrv" sourceRef="Task_01em9hs" targetRef="EndEvent_1jq05om" />
+    <bpmn:sequenceFlow id="SequenceFlow_0x0xqrv" sourceRef="SayHellp" targetRef="EndEvent_1jq05om" />
+    <bpmn:sequenceFlow id="SequenceFlow_14ybrav" name="name" sourceRef="EnterName" targetRef="SayHellp">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">$(name)</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:userTask id="EnterName" name="Enter Name" camunda:formKey="name form">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="text1" />
+        </camunda:inputOutput>
+        <camunda:formData>
+          <camunda:formField id="name" label="name" type="string" defaultValue="world" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_165tjek</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_14ybrav</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <dc:Bounds x="168" y="112" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="164" y="145" width="54" height="40" />
+          <dc:Bounds x="159" y="155" width="54" height="40" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_165tjek_di" bpmnElement="SequenceFlow_165tjek">
-        <di:waypoint x="209" y="120" />
-        <di:waypoint x="325" y="120" />
+        <di:waypoint x="204" y="130" />
+        <di:waypoint x="301" y="130" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_0t3xroo_di" bpmnElement="Task_01em9hs">
-        <dc:Bounds x="325" y="80" width="100" height="80" />
+      <bpmndi:BPMNShape id="ServiceTask_0t3xroo_di" bpmnElement="SayHellp">
+        <dc:Bounds x="532" y="80" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="EndEvent_1jq05om_di" bpmnElement="EndEvent_1jq05om">
-        <dc:Bounds x="541" y="102" width="36" height="36" />
+        <dc:Bounds x="758" y="102" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="536" y="145" width="46" height="27" />
+          <dc:Bounds x="753" y="145" width="46" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0x0xqrv_di" bpmnElement="SequenceFlow_0x0xqrv">
-        <di:waypoint x="425" y="120" />
-        <di:waypoint x="541" y="120" />
+        <di:waypoint x="632" y="120" />
+        <di:waypoint x="758" y="120" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_14ybrav_di" bpmnElement="SequenceFlow_14ybrav">
+        <di:waypoint x="401" y="120" />
+        <di:waypoint x="532" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="453" y="102" width="28" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0zq4fmg_di" bpmnElement="EnterName">
+        <dc:Bounds x="301" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>
