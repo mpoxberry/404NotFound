@@ -25,13 +25,39 @@ public class DrinkController {
 	public String getCocktailSearch(@PathVariable("cocktail-name") String cocktailName) {
 		HttpHeaders headers = new HttpHeaders();
         
-        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + "/search.php?s=")
-                .queryParam("cocktail", cocktailName);
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + "/search.php")
+                .queryParam("s", cocktailName);
         
         HttpEntity<?> entity = new HttpEntity<>(headers);
         
         HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
         return response.getBody(); 
+	}
+	
+	@RequestMapping(path = "/cocktail/search/alcohol/{alcohol}")
+	public String getByAlcohol(@PathVariable("alcohol") String alcohol) {
+		HttpHeaders headers = new HttpHeaders();
+        
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + "/filter.php")
+                .queryParam("i", alcohol);
+        
+        HttpEntity<?> entity = new HttpEntity<>(headers);
+        
+        HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+        return response.getBody(); 
+	}
+	
+	@RequestMapping(path = "/cocktail/search/id/{id}")
+	public String getById(@PathVariable("id") String id) {
+		HttpHeaders headers = new HttpHeaders();
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl + "/lookup.php")
+				.queryParam("i", id);
+		
+		HttpEntity<?> entity = new HttpEntity<>(headers);
+		
+		HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+		return response.getBody();
 	}
 
 }
