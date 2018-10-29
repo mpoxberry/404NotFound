@@ -39,6 +39,6 @@ public class Application implements CommandLineRunner {
 
     @EventListener
     private void processPostDeploy(PostDeployEvent event) {
-        runtimeService.startProcessInstanceByKey("loanApproval");
+        runtimeService.startProcessInstanceByKey("Process_1");
     }
 }
