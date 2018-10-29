@@ -46,5 +46,7 @@ public class Application implements CommandLineRunner {
         log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
         log.info("Tenant Id {}", loanApproval.getTenantId());
 
+        runtimeService.startProcessInstanceByKey("Process_1");
+
     }
 }
