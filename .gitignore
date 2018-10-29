@@ -1,0 +1,44 @@
+### Extra Files ###
+*.log*
+*.epoch
+*.lck
+.svn/
+*.fpr
+target/
+!.mvn/wrapper/maven-wrapper.jar
+node_modules/
+node/
+logs/
+.vscode
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Visual Studio Code ###
+.vscode/*
+
+### ngx-rocket ###
+.env.json
+.env.ts
+
+### NetBeans ###
+nbproject/private/
+dist/
+nbdist/
+.nb-gradle/
+
+### Misc ###
+npm-debug.log
+/.metadata/
+
