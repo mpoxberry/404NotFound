@@ -9,3 +9,7 @@ camunda.bpm:
 yelp:
   endpoint: https://api.yelp.com/v3
   token: hqMsgB_xwwoYGoWa-tvJsc6SFii_U6aLaBuvIdERcwEq1U0KwXJiaSRIx8LOGgudr0-kOGU9Ct7NUpOwxOvQbSW3agr2e-qCuiSH3R9t8epEbWBPrRas2a6gHirXW3Yx
+  
+tmdb:
+  endpoint: https://api.themoviedb.org/3
+  token: 4f5accf8dda0bad1b32b1cb2a96e5db0
