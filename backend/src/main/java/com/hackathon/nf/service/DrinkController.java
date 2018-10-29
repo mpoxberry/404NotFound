@@ -1,5 +1,8 @@
 package com.hackathon.nf.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -11,10 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.hackathon.nf.model.FoodAlcoholPair;
+
 @RestController
 @RequestMapping("/api/drinks")
 public class DrinkController {
 
+	List<FoodAlcoholPair> pairings = new ArrayList<>();
+	
 	@Autowired
 	RestTemplate restTemplate;
 	
