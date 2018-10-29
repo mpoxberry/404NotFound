@@ -1,6 +1,7 @@
 package com.hackathon.nf;
 
 import org.camunda.bpm.engine.RuntimeService;
+import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import com.hackathon.nf.model.User;
 import lombok.extern.slf4j.Slf4j;
 
 @SpringBootApplication
-@EnableProcessApplication
+@EnableProcessApplication("hacktonteam1")
 @Slf4j
 public class Application implements CommandLineRunner {
 
@@ -39,6 +40,13 @@ public class Application implements CommandLineRunner {
 
     @EventListener
     private void processPostDeploy(PostDeployEvent event) {
-        runtimeService.startProcessInstanceByKey("loanApproval");
+        ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
+        log.info("BusinessKey {}", loanApproval.getBusinessKey());
+        log.info("Instance Id {}", loanApproval.getCaseInstanceId());
+        log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
+        log.info("Tenant Id {}", loanApproval.getTenantId());
+
+        runtimeService.startProcessInstanceByKey("Process_1");
+
     }
 }
