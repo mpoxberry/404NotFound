@@ -1,4 +1,4 @@
-package com.hackathon.nf;
+package com.hackathon.nf.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

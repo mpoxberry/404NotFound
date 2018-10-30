@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.hackathon.nf.model.EventSelection;
 import com.hackathon.nf.model.User;
 
 @RestController
@@ -29,11 +30,26 @@ public class WorkflowController {
     
     @RequestMapping("/movies")
     public void getMovies() {
+        service.findMaxSelectedMovie();
+    }
+    
+    @RequestMapping("/drinks")
+    public void getDrinks() {
+        service.findMaxSelectedDrink();
+    }
+    
+    @RequestMapping("/restaurants")
+    public void getRestaurants() {
         service.findMaxSelectedRestaurant();
     }
     
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         service.saveUser(user);
+    }
+    
+    @RequestMapping(value = "/event", method = RequestMethod.POST)
+    public void saveEvent(@RequestBody EventSelection eventSelection) {
+        service.save(eventSelection);
     }
 }

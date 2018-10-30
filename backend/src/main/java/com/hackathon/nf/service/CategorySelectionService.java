@@ -7,10 +7,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.hackathon.nf.CategoryCount;
 import com.hackathon.nf.dao.EventDao;
 import com.hackathon.nf.dao.EventSelectionDao;
 import com.hackathon.nf.dao.UsserDao;
+import com.hackathon.nf.model.CategoryCount;
 import com.hackathon.nf.model.Event;
 import com.hackathon.nf.model.EventSelection;
 import com.hackathon.nf.model.FoodAlcoholPair;
