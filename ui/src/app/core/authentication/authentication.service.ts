@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+const endpoint = '/api/workflow/';
 
 export interface Credentials {
   // Customize received credentials here
@@ -24,7 +27,7 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
   private _credentials: Credentials | null;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
     if (savedCredentials) {
       this._credentials = JSON.parse(savedCredentials);
@@ -37,6 +40,14 @@ export class AuthenticationService {
    * @return {Observable<Credentials>} The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
+    this.startWorkFlow().subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+      }
+    );
     // Replace by proper authentication call
     const data = {
       username: context.username,
@@ -63,6 +74,11 @@ export class AuthenticationService {
    */
   isAuthenticated(): boolean {
     return !!this.credentials;
+  }
+
+  startWorkFlow() {
+    console.log('workflow started');
+    return this.http.get(endpoint + '/start');
   }
 
   /**
