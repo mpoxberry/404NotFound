@@ -1,6 +1,8 @@
 package com.hackathon.nf.model;
 
-public class FoodAlcoholPair {
+import java.io.Serializable;
+
+public class FoodAlcoholPair implements Serializable{
 	private String foodType;
 	private String alcohol;
 	
