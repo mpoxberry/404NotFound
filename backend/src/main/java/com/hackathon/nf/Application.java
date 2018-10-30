@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.hackathon.nf.dao.UsserDao;
 import com.hackathon.nf.model.User;
@@ -35,18 +37,18 @@ public class Application implements CommandLineRunner {
         User user = usserDao.save(User.builder().userName("bizu").password("Password").build());
 
         log.info("Saved user: {}", usserDao.findById(user.getId()).toString());
-        log.info("User Name: {}", usserDao.findById(user.getId()).get().getUserName());
+        //log.info("User Name: {}", usserDao.findById(user.getId()).get().getUserName());
     }
 
-//    @EventListener
-//    private void processPostDeploy(PostDeployEvent event) {
-//        ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
-//        log.info("BusinessKey {}", loanApproval.getBusinessKey());
-//        log.info("Instance Id {}", loanApproval.getCaseInstanceId());
-//        log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
-//        log.info("Tenant Id {}", loanApproval.getTenantId());
-//
-//        runtimeService.startProcessInstanceByKey("Process_1");
-//
-//    }
+    // @EventListener
+    // private void processPostDeploy(PostDeployEvent event) {
+    // ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
+    // log.info("BusinessKey {}", loanApproval.getBusinessKey());
+    // log.info("Instance Id {}", loanApproval.getCaseInstanceId());
+    // log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
+    // log.info("Tenant Id {}", loanApproval.getTenantId());
+    //
+    // runtimeService.startProcessInstanceByKey("Process_1");
+    //
+    // }
 }

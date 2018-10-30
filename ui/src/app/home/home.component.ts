@@ -1,9 +1,9 @@
 import { FoodService } from './food.service';
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MovieService } from './movie.service';
+import { DrinkService } from './drink.service';
 
 export interface GenreResponse {
   id: number;
@@ -17,22 +17,37 @@ export interface GenreResponse {
 export class HomeComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  genres: GenreResponse[];
+  thirdFormGroup: FormGroup;
   foods: Object[];
-  movies: Object;
+  genres: GenreResponse[];
+  drinks: Object[];
+  movies: Object[];
+  foodChoice: any;
+  genreChoice: any;
+  drinkChoice: any;
+  isDisplayed = false;
 
-  constructor(private _formBuilder: FormBuilder, private movieService: MovieService, private foodService: FoodService) {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private movieService: MovieService,
+    private foodService: FoodService,
+    private drinkService: DrinkService
+  ) {
     this.loadGenres();
     this.loadFoods();
+    this.loadDrinks();
+    this.loadMovies();
   }
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      food: [''],
-      movie: ['']
+      food: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
+      genre: ['']
+    });
+    this.thirdFormGroup = this._formBuilder.group({
+      drink: ['']
     });
   }
 
@@ -49,6 +64,20 @@ export class HomeComponent implements OnInit {
   loadMovies() {
     this.movieService.getMovieList('28', '', 'popularity.desc').subscribe(res => {
       this.movies = res['results'];
+      console.log(this.movies);
     });
+  }
+
+  loadDrinks() {
+    this.drinks = this.drinkService.getDrinks();
+  }
+  firstFormGroupSubmit() {
+    this.foodChoice = this.firstFormGroup.value.food;
+  }
+  secondFormGroupSubmit() {
+    this.genreChoice = this.secondFormGroup.value.genre;
+  }
+  thirdFormGroupSubmit() {
+    this.drinkChoice = this.thirdFormGroup.value.drink;
   }
 }

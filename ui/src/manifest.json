@@ -1,14 +1,16 @@
 {
-  "name": "name-not-found-ui",
-  "short_name": "name-not-found-ui",
+  "name": "workflowtheysay",
+  "short_name": "workflowtheysay",
   "theme_color": "#488aff",
   "background_color": "#488aff",
   "scope": "/",
   "start_url": "/",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/ngx-rocket-logo.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }]
+  "icons": [
+    {
+      "src": "assets/ngx-rocket-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }

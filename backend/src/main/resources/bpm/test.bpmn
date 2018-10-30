@@ -6,66 +6,197 @@
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_1yhov3m" sourceRef="StartEvent_1" targetRef="Task_03u7rc1" />
     <bpmn:endEvent id="EndEvent_0ad03vn" name="End">
-      <bpmn:incoming>SequenceFlow_1n6qtsq</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0nhsvwm</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_03u7rc1" name="Test Input">
+    <bpmn:userTask id="Task_03u7rc1" name="FoodInput">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Input_2qgs6am">TEST!</camunda:inputParameter>
-          <camunda:outputParameter name="Output_3oopni5">${Input_2qgs6am}</camunda:outputParameter>
+          <camunda:inputParameter name="food" />
+          <camunda:inputParameter name="username" />
+          <camunda:inputParameter name="eventid" />
+          <camunda:outputParameter name="outfood">${food}</camunda:outputParameter>
+          <camunda:outputParameter name="outusername">${username}</camunda:outputParameter>
+          <camunda:outputParameter name="outeventid">${eventid}</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_1yhov3m</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0sdvk5y</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0sdvk5y" sourceRef="Task_03u7rc1" targetRef="Task_0cykgjk" />
-    <bpmn:sequenceFlow id="SequenceFlow_1n6qtsq" sourceRef="Task_0cykgjk" targetRef="EndEvent_0ad03vn" />
-    <bpmn:serviceTask id="Task_0cykgjk" name="Test Output" camunda:class="com.hackathon.nf.delegates.Hello">
+    <bpmn:sequenceFlow id="SequenceFlow_1n6qtsq" sourceRef="Task_0cykgjk" targetRef="Task_0seet5t" />
+    <bpmn:serviceTask id="Task_0cykgjk" name="SaveFoodSelection&#10;&#10;" camunda:delegateExpression="${foodService}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:inputParameter name="Input_00qmfa7">${Output_3oopni5}</camunda:inputParameter>
-          <camunda:outputParameter name="Output_1r167jo">${Input_00qmfa7}</camunda:outputParameter>
+          <camunda:inputParameter name="food">${outfood}</camunda:inputParameter>
+          <camunda:inputParameter name="username">${outusername}</camunda:inputParameter>
+          <camunda:inputParameter name="eventid">${outeventid}</camunda:inputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0sdvk5y</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1n6qtsq</bpmn:outgoing>
     </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0nhsvwm" sourceRef="Task_1m213d7" targetRef="EndEvent_0ad03vn" />
+    <bpmn:userTask id="Task_0seet5t" name="FoodTypeCompletion">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="complete" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1n6qtsq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1snap8t</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1snap8t" sourceRef="Task_0seet5t" targetRef="Task_19wn9pm" />
+    <bpmn:userTask id="Task_19wn9pm" name="GenreInput">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="genre" />
+          <camunda:inputParameter name="username" />
+          <camunda:inputParameter name="eventid" />
+          <camunda:outputParameter name="outgenre">${genre}</camunda:outputParameter>
+          <camunda:outputParameter name="outusername">${username}</camunda:outputParameter>
+          <camunda:outputParameter name="outeventid">${eventid}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1snap8t</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_16c9pzm</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_16c9pzm" sourceRef="Task_19wn9pm" targetRef="Task_1z12epl" />
+    <bpmn:serviceTask id="Task_1z12epl" name="SaveGenre" camunda:delegateExpression="${genreService}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="genre">${outgenre}</camunda:inputParameter>
+          <camunda:inputParameter name="username">${outusername}</camunda:inputParameter>
+          <camunda:inputParameter name="eventid">${outeventid}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_16c9pzm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1o2m04q</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1o2m04q" sourceRef="Task_1z12epl" targetRef="Task_15jlait" />
+    <bpmn:userTask id="Task_15jlait" name="GenreCompletion">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="complete" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1o2m04q</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0i9u84a</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0i9u84a" sourceRef="Task_15jlait" targetRef="Task_1mgw0wy" />
+    <bpmn:sequenceFlow id="SequenceFlow_11armkl" sourceRef="Task_1mgw0wy" targetRef="Task_1uh3whc" />
+    <bpmn:serviceTask id="Task_1uh3whc" name="SaveDrink" camunda:delegateExpression="${drinkService}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="drink">${outdrink}</camunda:inputParameter>
+          <camunda:inputParameter name="username">${username}</camunda:inputParameter>
+          <camunda:inputParameter name="eventid">${outeventid}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_11armkl</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_102vbfq</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_102vbfq" sourceRef="Task_1uh3whc" targetRef="Task_1m213d7" />
+    <bpmn:userTask id="Task_1m213d7" name="DrinkCompletion">
+      <bpmn:incoming>SequenceFlow_102vbfq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0nhsvwm</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_1mgw0wy" name="DrinkInput">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="drink" />
+          <camunda:inputParameter name="username" />
+          <camunda:inputParameter name="eventid" />
+          <camunda:outputParameter name="outdrink">${drink}</camunda:outputParameter>
+          <camunda:outputParameter name="outusername">${username}</camunda:outputParameter>
+          <camunda:outputParameter name="outeventid">${eventid}</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_0i9u84a</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11armkl</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_2">
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="173" y="102" width="36" height="36" />
+        <dc:Bounds x="174" y="115" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="177" y="145" width="29" height="14" />
+          <dc:Bounds x="178" y="158" width="29" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1yhov3m_di" bpmnElement="SequenceFlow_1yhov3m">
-        <di:waypoint x="209" y="120" />
-        <di:waypoint x="232" y="120" />
-        <di:waypoint x="232" y="121" />
-        <di:waypoint x="254" y="121" />
+        <di:waypoint x="210" y="133" />
+        <di:waypoint x="263" y="133" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_0ad03vn_di" bpmnElement="EndEvent_0ad03vn">
-        <dc:Bounds x="709" y="115" width="36" height="36" />
+        <dc:Bounds x="1408" y="403" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="717" y="158" width="20" height="14" />
+          <dc:Bounds x="1416" y="379" width="20" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="UserTask_1glpztn_di" bpmnElement="Task_03u7rc1">
-        <dc:Bounds x="254" y="81" width="100" height="80" />
+        <dc:Bounds x="263" y="93" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0sdvk5y_di" bpmnElement="SequenceFlow_0sdvk5y">
-        <di:waypoint x="354" y="121" />
-        <di:waypoint x="426" y="121" />
-        <di:waypoint x="426" y="133" />
-        <di:waypoint x="486" y="133" />
+        <di:waypoint x="363" y="133" />
+        <di:waypoint x="404" y="133" />
+        <di:waypoint x="404" y="132" />
+        <di:waypoint x="444" y="132" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1n6qtsq_di" bpmnElement="SequenceFlow_1n6qtsq">
-        <di:waypoint x="586" y="133" />
-        <di:waypoint x="709" y="133" />
+        <di:waypoint x="544" y="132" />
+        <di:waypoint x="591" y="132" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0ejtrtn_di" bpmnElement="Task_0cykgjk">
-        <dc:Bounds x="486" y="93" width="100" height="80" />
+        <dc:Bounds x="444" y="92" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0nhsvwm_di" bpmnElement="SequenceFlow_0nhsvwm">
+        <di:waypoint x="1318" y="421" />
+        <di:waypoint x="1408" y="421" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1cka0vp_di" bpmnElement="Task_0seet5t">
+        <dc:Bounds x="591" y="92" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1snap8t_di" bpmnElement="SequenceFlow_1snap8t">
+        <di:waypoint x="641" y="172" />
+        <di:waypoint x="641" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1yvunk9_di" bpmnElement="Task_19wn9pm">
+        <dc:Bounds x="591" y="225" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_16c9pzm_di" bpmnElement="SequenceFlow_16c9pzm">
+        <di:waypoint x="691" y="265" />
+        <di:waypoint x="748" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_1pohfmp_di" bpmnElement="Task_1z12epl">
+        <dc:Bounds x="748" y="225" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1o2m04q_di" bpmnElement="SequenceFlow_1o2m04q">
+        <di:waypoint x="848" y="265" />
+        <di:waypoint x="918" y="265" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1imq8b8_di" bpmnElement="Task_15jlait">
+        <dc:Bounds x="918" y="225" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0i9u84a_di" bpmnElement="SequenceFlow_0i9u84a">
+        <di:waypoint x="968" y="305" />
+        <di:waypoint x="968" y="381" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11armkl_di" bpmnElement="SequenceFlow_11armkl">
+        <di:waypoint x="1018" y="421" />
+        <di:waypoint x="1068" y="421" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0fa6h6u_di" bpmnElement="Task_1uh3whc">
+        <dc:Bounds x="1068" y="381" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_102vbfq_di" bpmnElement="SequenceFlow_102vbfq">
+        <di:waypoint x="1168" y="421" />
+        <di:waypoint x="1218" y="421" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_0mp9z6b_di" bpmnElement="Task_1m213d7">
+        <dc:Bounds x="1218" y="381" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_08zv5yl_di" bpmnElement="Task_1mgw0wy">
+        <dc:Bounds x="918" y="381" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
