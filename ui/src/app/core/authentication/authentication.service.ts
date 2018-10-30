@@ -89,18 +89,14 @@ export class AuthenticationService {
     const data = {
       variables: {
         name: {
-          value: cuisine
+          value: id
         }
       }
     };
+    console.log(id, cuisine);
     return this.http.post('/rest/task/' + id + '/complete', data);
   }
 
-  doTask(cuisine: string) {
-    this.getTask().subscribe(res => {
-      this.completeTask(res[0].id, cuisine);
-    });
-  }
   /**
    * Gets the user credentials.
    * @return {Credentials} The user credentials or null if the user is not authenticated.

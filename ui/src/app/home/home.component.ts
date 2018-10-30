@@ -75,7 +75,11 @@ export class HomeComponent implements OnInit {
   }
   firstFormGroupSubmit() {
     this.foodChoice = this.firstFormGroup.value.food;
-    this.authenticationService.doTask(this.firstFormGroup.value.food);
+    this.authenticationService.getTask().subscribe(res => {
+      this.authenticationService.completeTask(res[0].id, this.firstFormGroup.value.food).subscribe(response => {
+        console.log(response);
+      });
+    });
   }
   secondFormGroupSubmit() {
     this.genreChoice = this.secondFormGroup.value.genre;
