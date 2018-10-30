@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   drinkChoice: any;
 
   restaurantChoice: string;
+  movieChoice: string;
   isDisplayed = false;
 
   constructor(
@@ -92,6 +93,11 @@ export class HomeComponent implements OnInit {
     this.foodService.getRestaurantChoice('west chester, pa', this.foodChoice).subscribe(res => {
       console.log(res['businesses'][0].name);
       this.restaurantChoice = res['businesses'][0].name;
+    });
+
+    this.movieService.getMovieList(this.genreChoice, '', 'popularity.desc').subscribe(res => {
+      console.log(res);
+      this.movieChoice = res['results'][0].title;
     });
   }
 }

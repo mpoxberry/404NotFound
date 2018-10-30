@@ -27,7 +27,7 @@
           <br>
           <mat-form-field class="dropdown">
             <mat-select #selectGenre formControlName="genre" placeholder="Genre">
-              <mat-option *ngFor="let genre of genres" [value]="genre.name">
+              <mat-option *ngFor="let genre of genres" [value]="genre.id">
                 {{genre.name}}
               </mat-option>
             </mat-select>
@@ -65,7 +65,7 @@
           <mat-icon mat-list-icon>restaurant_menu</mat-icon>{{restaurantChoice}}
           <br>
           <br>
-          <mat-icon mat-list-icon>movie</mat-icon>{{genreChoice}}
+          <mat-icon mat-list-icon>movie</mat-icon>{{movieChoice}}
           <br>
           <br>
           <mat-icon mat-list-icon>local_drink</mat-icon>{{drinkChoice}}
