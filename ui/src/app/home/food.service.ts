@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
-const endpoint = '/api/business/';
+const endpoint = '/api/businesses/';
 @Injectable({
   providedIn: 'root'
 })
 export class FoodService {
   constructor(private http: HttpClient) {}
+
+  getRestaurantChoice(location: string, categories: string) {
+    const params = new HttpParams().set('location', location).set('categories', categories);
+
+    return this.http.get(endpoint + '/search', { params: params });
+  }
 
   getRestaurants() {
     return [

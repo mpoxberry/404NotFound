@@ -10,7 +10,6 @@
           <br>
           <mat-form-field class="dropdown">
             <mat-select #selectFood formControlName="food" class="dropdown" placeholder="Food Type">
-              <mat-option [value]=""></mat-option>
               <mat-option *ngFor="let food of foods" [value]="food.value">
                 {{food.name}}
               </mat-option>
@@ -28,7 +27,6 @@
           <br>
           <mat-form-field class="dropdown">
             <mat-select #selectGenre formControlName="genre" placeholder="Genre">
-              <mat-option [value]=""></mat-option>
               <mat-option *ngFor="let genre of genres" [value]="genre.name">
                 {{genre.name}}
               </mat-option>
@@ -64,7 +62,7 @@
         <ng-template matStepLabel>Check</ng-template>
         <br>
         <mat-list>
-          <mat-icon mat-list-icon>restaurant_menu</mat-icon>{{foodChoice}}
+          <mat-icon mat-list-icon>restaurant_menu</mat-icon>{{restaurantChoice}}
           <br>
           <br>
           <mat-icon mat-list-icon>movie</mat-icon>{{genreChoice}}
