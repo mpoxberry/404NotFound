@@ -4,6 +4,7 @@ import { finalize } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MovieService } from './movie.service';
 import { DrinkService } from './drink.service';
+import { AuthenticationService } from '@app/core/authentication/authentication.service';
 
 export interface GenreResponse {
   id: number;
@@ -31,7 +32,8 @@ export class HomeComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private movieService: MovieService,
     private foodService: FoodService,
-    private drinkService: DrinkService
+    private drinkService: DrinkService,
+    private authenticationService: AuthenticationService
   ) {
     this.loadGenres();
     this.loadFoods();
@@ -73,6 +75,7 @@ export class HomeComponent implements OnInit {
   }
   firstFormGroupSubmit() {
     this.foodChoice = this.firstFormGroup.value.food;
+    this.authenticationService.doTask(this.firstFormGroup.value.food);
   }
   secondFormGroupSubmit() {
     this.genreChoice = this.secondFormGroup.value.genre;
