@@ -1,4 +1,4 @@
-package com.hackathon.nf.dao;
+package com.hackathon.nf;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.hackathon.nf.CategoryCount;
 import com.hackathon.nf.model.EventSelection;
 
 @Repository
