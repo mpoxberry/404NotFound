@@ -56,7 +56,10 @@ public class Application implements CommandLineRunner {
 
         CategoryCount maxMovie = eventSelectionDao.findMaxSelectedMovie().stream().max((m1, m2) -> Long.compare(m1.getCount(), m2.getCount())).get();
         log.info("Movie Name: {}, Count: {}\n", maxMovie.getName(), maxMovie.getCount());
-
+        List<EventSelection> eventSelection = eventSelectionDao.findAll();
+        log.info(eventSelection.get(0).getEvent().getEventName());
+        log.info(eventSelection.get(0).getUser().getUserName());
+        
     }
 
     @Transactional(TxType.REQUIRED)

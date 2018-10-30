@@ -41,6 +41,9 @@ public class CategorySelectionService {
         return eventDao.findAll();
     }
 
+    public List<Event> findAllEventsByUser(String username) {
+        return eventDao.findAll();
+    }
     public Optional<Event> findEventById(Long id) {
         return eventDao.findById(id);
     }
@@ -92,8 +95,13 @@ public class CategorySelectionService {
     public List<User> findAllUsers() {
         return userDao.findAll();
     }
+    
+    public List<EventSelection> findAllUserAndEvent(String eventName, String userName){
+        return eventSelectionDao.findAllUserAndEvent(eventName, userName);
+    }
+    
 
-    public Optional<User> findById(Long id) {
+    public Optional<User> findUserById(Long id) {
         return userDao.findById(id);
     }
 

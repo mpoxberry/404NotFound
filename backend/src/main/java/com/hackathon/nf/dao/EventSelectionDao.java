@@ -32,4 +32,7 @@ public interface EventSelectionDao extends CrudRepository<EventSelection, Long> 
 
     @Query("SELECT new com.hackathon.nf.model.CategoryCount(count(drink), drink) FROM EventSelection GROUP BY drink")
     List<CategoryCount> findMaxSelectedDrink();
+    
+    @Query("SELECT es FROM EventSelection es where es.event.eventName = ?1 and es.user.userName = ?2")
+    List<EventSelection> findAllUserAndEvent(String eventName, String userName);
 }
