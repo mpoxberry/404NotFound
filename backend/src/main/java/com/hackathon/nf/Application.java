@@ -1,9 +1,11 @@
 package com.hackathon.nf;
 
+import org.camunda.bpm.engine.ProcessEngine;
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
+import org.camunda.bpm.engine.task.Task;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
-import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
+import org.camunda.bpm.spring.boot.starter.event.ProcessApplicationStoppedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -24,6 +26,9 @@ public class Application implements CommandLineRunner {
     private RuntimeService runtimeService;
 
     @Autowired
+    private ProcessEngine engine;
+
+    @Autowired
     private UsserDao usserDao;
 
     public static void main(String[] args) {
@@ -39,12 +44,9 @@ public class Application implements CommandLineRunner {
     }
 
 //    @EventListener
-//    private void processPostDeploy(PostDeployEvent event) {
+//    private void processPostDeploy(ProcessApplicationStoppedEvent event) {
+//      
 //        ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
-//        log.info("BusinessKey {}", loanApproval.getBusinessKey());
-//        log.info("Instance Id {}", loanApproval.getCaseInstanceId());
-//        log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
-//        log.info("Tenant Id {}", loanApproval.getTenantId());
 //
 //        runtimeService.startProcessInstanceByKey("Process_1");
 //
