@@ -35,6 +35,9 @@ export class HomeComponent implements OnInit {
   genreChoice: any;
   drinkChoice: any;
 
+  movieImage = '';
+  restaurantImage = '';
+
   restaurantChoice: string;
   movieChoice: string;
   isDisplayed = false;
@@ -106,11 +109,13 @@ export class HomeComponent implements OnInit {
     this.foodService.getRestaurantChoice('west chester, pa', this.foodChoice).subscribe(res => {
       console.log(res['businesses'][0].name);
       this.restaurantChoice = res['businesses'][0].name;
+      this.restaurantImage = res['businesses'][0].image_url;
     });
 
     this.movieService.getMovieList(this.genreChoice, '', 'popularity.desc').subscribe(res => {
       console.log(res);
       this.movieChoice = res['results'][0].title;
+      this.movieImage = 'https://image.tmdb.org/t/p/original/' + res['results'][0].poster_path;
     });
   }
 }
