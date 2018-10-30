@@ -27,7 +27,7 @@
           <br>
           <mat-form-field class="dropdown">
             <mat-select #selectGenre formControlName="genre" placeholder="Genre">
-              <mat-option *ngFor="let genre of genres" [value]="genre.name">
+              <mat-option *ngFor="let genre of genres" [value]="genre.id">
                 {{genre.name}}
               </mat-option>
             </mat-select>
@@ -61,15 +61,24 @@
       <mat-step>
         <ng-template matStepLabel>Check</ng-template>
         <br>
-        <mat-list>
-          <mat-icon mat-list-icon>restaurant_menu</mat-icon>{{restaurantChoice}}
+        <mat-list style="display: inline-flex;">
+          <mat-card style="margin: 10px;">
+            <img style="width: 400px;" src="{{restaurantImage}}" /> 
+            <p>{{restaurantChoice}}</p>
+          </mat-card>
           <br>
           <br>
-          <mat-icon mat-list-icon>movie</mat-icon>{{genreChoice}}
+          <mat-card style="margin: 10px;">
+            <img style="width: 400px;" src="{{movieImage}}" /> 
+            <p>{{movieChoice}}</p>
+          </mat-card>
           <br>
           <br>
-          <mat-icon mat-list-icon>local_drink</mat-icon>{{drinkChoice}}
-          <img [src]="finalDrink.strDrinkThumb">
+          <mat-card style="margin: 10px;">
+            <img style="width: 400px;" src="{{drinkImage}}" /> 
+            <p>{{drinkChoice}}</p>
+          </mat-card>
+          
         </mat-list>
         <br>
 

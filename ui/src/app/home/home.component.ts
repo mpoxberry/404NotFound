@@ -34,9 +34,11 @@ export class HomeComponent implements OnInit {
   foodChoice: any;
   genreChoice: any;
   drinkChoice: string;
-
-  finalDrink: Drink;
+  movieImage = '';
+  restaurantImage = '';
+  drinkImage = '';
   restaurantChoice: string;
+  movieChoice: string;
   isDisplayed = false;
 
   constructor(
@@ -100,14 +102,20 @@ export class HomeComponent implements OnInit {
     console.log(this.thirdFormGroup.value.drink);
     this.drinkService.getDrinkByAlcohol(this.thirdFormGroup.value.drink).subscribe(res => {
       this.drinkService.getDrinkById(res.drinks[0].idDrink).subscribe(response => {
-        this.finalDrink.idDrink = res.drinks[0].idDrink;
-        this.finalDrink.strDrinkThumb = response.drinks[0].strDrinkThumb;
+        this.drinkImage = res.drinks[0].strDrinkThumb;
         console.log(response);
       });
     });
     this.foodService.getRestaurantChoice('west chester, pa', this.foodChoice).subscribe(res => {
       console.log(res['businesses'][0].name);
       this.restaurantChoice = res['businesses'][0].name;
+      this.restaurantImage = res['businesses'][0].image_url;
+    });
+
+    this.movieService.getMovieList(this.genreChoice, '', 'popularity.desc').subscribe(res => {
+      console.log(res);
+      this.movieChoice = res['results'][0].title;
+      this.movieImage = 'https://image.tmdb.org/t/p/original/' + res['results'][0].poster_path;
     });
   }
 }

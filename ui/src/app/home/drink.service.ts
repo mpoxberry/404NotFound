@@ -9,7 +9,14 @@ export class DrinkService {
   constructor(private http: HttpClient) {}
 
   getDrinks() {
-    return [{ name: 'Vodka', value: 'Vodka' }, { name: 'Beer', value: 'Beer' }, { name: 'Wine', value: 'Wine' }];
+    return [
+      { name: 'Vodka', value: 'Vodka' },
+      { name: 'Beer', value: 'Beer' },
+      { name: 'Margarita', value: 'Margarita' },
+      { name: 'Rum', value: 'Rum' },
+      { name: 'Whisky', value: 'Whisky' },
+      { name: 'Wine', value: 'Wine' }
+    ];
   }
 
   getDrinkByAlcohol(alcohol: string) {
