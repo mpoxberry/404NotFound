@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   foodChoice: any;
   genreChoice: any;
   drinkChoice: any;
+
+  restaurantChoice: string;
   isDisplayed = false;
 
   constructor(
@@ -86,5 +88,10 @@ export class HomeComponent implements OnInit {
   }
   thirdFormGroupSubmit() {
     this.drinkChoice = this.thirdFormGroup.value.drink;
+
+    this.foodService.getRestaurantChoice('west chester, pa', this.foodChoice).subscribe(res => {
+      console.log(res['businesses'][0].name);
+      this.restaurantChoice = res['businesses'][0].name;
+    });
   }
 }
