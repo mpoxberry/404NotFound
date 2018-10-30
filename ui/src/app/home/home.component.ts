@@ -10,6 +10,14 @@ export interface GenreResponse {
   id: number;
   name: string;
 }
+export interface Drink {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+}
+export interface Drinks {
+  drinks: Drink[];
+}
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -89,7 +97,12 @@ export class HomeComponent implements OnInit {
   }
   thirdFormGroupSubmit() {
     this.drinkChoice = this.thirdFormGroup.value.drink;
-
+    console.log(this.thirdFormGroup.value.drink);
+    this.drinkService.getDrinkByAlcohol(this.thirdFormGroup.value.drink).subscribe(res => {
+      this.drinkService.getDrinkById(res.drinks[0].idDrink).subscribe(response => {
+        console.log(response);
+      });
+    });
     this.foodService.getRestaurantChoice('west chester, pa', this.foodChoice).subscribe(res => {
       console.log(res['businesses'][0].name);
       this.restaurantChoice = res['businesses'][0].name;
