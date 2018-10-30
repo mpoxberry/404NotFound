@@ -1,6 +1,13 @@
 spring:
   application:
     name: hacktonteam1
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+
 camunda:
   bpm:
     admin-user:
@@ -9,6 +16,8 @@ camunda:
       firstName: Bizu
     filter:
       create: All tasks
+
+
 
 yelp:
   endpoint: https://api.yelp.com/v3

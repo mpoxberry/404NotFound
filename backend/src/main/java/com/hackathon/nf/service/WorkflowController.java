@@ -20,34 +20,35 @@ public class WorkflowController {
 
     @Autowired
     RestTemplate restTemplate;
-    
-    CategorySelectionService service = new CategorySelectionService();
+
+    @Autowired
+    CategorySelectionService service;
 
     @RequestMapping("/start")
     public void start() {
         runtimeService.startProcessInstanceByKey("Process_2");
     }
-    
+
     @RequestMapping("/movies")
     public void getMovies() {
         service.findMaxSelectedMovie();
     }
-    
+
     @RequestMapping("/drinks")
     public void getDrinks() {
         service.findMaxSelectedDrink();
     }
-    
+
     @RequestMapping("/restaurants")
     public void getRestaurants() {
         service.findMaxSelectedRestaurant();
     }
-    
+
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         service.saveUser(user);
     }
-    
+
     @RequestMapping(value = "/event", method = RequestMethod.POST)
     public void saveEvent(@RequestBody EventSelection eventSelection) {
         service.save(eventSelection);

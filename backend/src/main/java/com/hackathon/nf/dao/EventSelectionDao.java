@@ -3,6 +3,8 @@ package com.hackathon.nf.dao;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -11,6 +13,7 @@ import com.hackathon.nf.model.CategoryCount;
 import com.hackathon.nf.model.EventSelection;
 
 @Repository
+@Transactional
 public interface EventSelectionDao extends CrudRepository<EventSelection, Long> {
 
     <S extends EventSelection> S save(EventSelection eventSelection);

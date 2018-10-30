@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.camunda.bpm.engine.ProcessEngine;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
+
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.hackathon.nf.dao.EventDao;
 import com.hackathon.nf.dao.EventSelectionDao;
 import com.hackathon.nf.dao.UsserDao;
+import com.hackathon.nf.model.CategoryCount;
 import com.hackathon.nf.model.Event;
 import com.hackathon.nf.model.EventSelection;
 import com.hackathon.nf.model.User;
@@ -36,7 +39,6 @@ public class Application implements CommandLineRunner {
     private EventDao eventDao;
     @Autowired
     private EventSelectionDao eventSelectionDao;
-    
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -44,25 +46,20 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        User user = usserDao.save(User.builder().userName("bizu").password("Password").build());
         createEventSelection();
 
-//        log.info("Saved user: {}", usserDao.findById(user.getId()).toString());
-        // log.info("User Name: {}", usserDao.findById(user.getId()).get().getUserName());
+        usserDao.save(User.builder().userName("User Name").emailAddress("email.com").build());
+
+        List<User> users = usserDao.findAll();
+        log.info(users.get(0).getEmailAddress());
+        List<EventSelection> eventSelections = eventSelectionDao.findAll();
+
+        CategoryCount maxMovie = eventSelectionDao.findMaxSelectedMovie().stream().max((m1, m2) -> Long.compare(m1.getCount(), m2.getCount())).get();
+        log.info("Movie Name: {}, Count: {}\n", maxMovie.getName(), maxMovie.getCount());
+
     }
 
-    // @EventListener
-    // private void processPostDeploy(PostDeployEvent event) {
-    // ProcessInstance loanApproval = runtimeService.startProcessInstanceByKey("loanApproval");
-    // log.info("BusinessKey {}", loanApproval.getBusinessKey());
-    // log.info("Instance Id {}", loanApproval.getCaseInstanceId());
-    // log.info("Process Definition Id {}", loanApproval.getProcessDefinitionId());
-    // log.info("Tenant Id {}", loanApproval.getTenantId());
-    //
-    // runtimeService.startProcessInstanceByKey("Process_1");
-    //
-    // }
-
+    @Transactional(TxType.REQUIRED)
     private void createEventSelection() {
         Random random = new Random();
 
