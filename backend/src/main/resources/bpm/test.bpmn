@@ -20,7 +20,7 @@
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_0sdvk5y" sourceRef="Task_03u7rc1" targetRef="Task_0cykgjk" />
     <bpmn:sequenceFlow id="SequenceFlow_1n6qtsq" sourceRef="Task_0cykgjk" targetRef="Task_0seet5t" />
-    <bpmn:serviceTask id="Task_0cykgjk" name="SaveFoodType" camunda:class="com.hackathon.nf.delegates.Hello">
+    <bpmn:serviceTask id="Task_0cykgjk" name="SaveFoodType" camunda:delegateExpression="${hello}">
       <bpmn:extensionElements>
         <camunda:inputOutput>
           <camunda:inputParameter name="food">${outfood}</camunda:inputParameter>
