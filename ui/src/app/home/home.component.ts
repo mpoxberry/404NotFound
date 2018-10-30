@@ -33,8 +33,9 @@ export class HomeComponent implements OnInit {
   movies: Object[];
   foodChoice: any;
   genreChoice: any;
-  drinkChoice: any;
+  drinkChoice: string;
 
+  finalDrink: Drink;
   restaurantChoice: string;
   isDisplayed = false;
 
@@ -99,6 +100,8 @@ export class HomeComponent implements OnInit {
     console.log(this.thirdFormGroup.value.drink);
     this.drinkService.getDrinkByAlcohol(this.thirdFormGroup.value.drink).subscribe(res => {
       this.drinkService.getDrinkById(res.drinks[0].idDrink).subscribe(response => {
+        this.finalDrink.idDrink = res.drinks[0].idDrink;
+        this.finalDrink.strDrinkThumb = response.drinks[0].strDrinkThumb;
         console.log(response);
       });
     });
