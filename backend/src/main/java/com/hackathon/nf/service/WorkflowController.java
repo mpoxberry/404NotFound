@@ -30,27 +30,27 @@ public class WorkflowController {
     }
 
     @RequestMapping("/movies")
-    public void getMovies() {
-        service.findMaxSelectedMovie();
+    public String getMovies() {
+        return service.findMaxSelectedMovie();
     }
 
     @RequestMapping("/drinks")
-    public void getDrinks() {
-        service.findMaxSelectedDrink();
+    public String getDrinks() {
+        return service.findMaxSelectedDrink();
     }
 
     @RequestMapping("/restaurants")
-    public void getRestaurants() {
-        service.findMaxSelectedRestaurant();
+    public String getRestaurants() {
+        return service.findMaxSelectedRestaurant();
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public void saveUser(@RequestBody User user) {
-        service.saveUser(user);
+    public User saveUser(@RequestBody User user) {
+        return service.saveUser(user);
     }
 
     @RequestMapping(value = "/event", method = RequestMethod.POST)
-    public void saveEvent(@RequestBody EventSelection eventSelection) {
-        service.save(eventSelection);
+    public EventSelection saveEvent(@RequestBody EventSelection eventSelection) {
+        return service.save(eventSelection);
     }
 }
