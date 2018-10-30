@@ -19,4 +19,8 @@ export class MovieService {
       .set('sort_by', sort);
     return this.http.get(endpoint + '/search', { params: params });
   }
+
+  getMovieImage(url: string) {
+    return this.http.get(endpoint + '/image/' + url);
+  }
 }

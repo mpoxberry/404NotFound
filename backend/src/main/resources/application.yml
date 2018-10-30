@@ -15,8 +15,9 @@ yelp:
   token: hqMsgB_xwwoYGoWa-tvJsc6SFii_U6aLaBuvIdERcwEq1U0KwXJiaSRIx8LOGgudr0-kOGU9Ct7NUpOwxOvQbSW3agr2e-qCuiSH3R9t8epEbWBPrRas2a6gHirXW3Yx
 
 thecocktaildb:
-  endpoint: https://www.thecocktaildb.com/api/json/v1/1/ 
+  endpoint: https://www.thecocktaildb.com/api/json/v1/1/
 
 tmdb:
+  image-endpoint: https://image.tmdb.org/t/p/original/
   endpoint: https://api.themoviedb.org/3
   token: 4f5accf8dda0bad1b32b1cb2a96e5db0
