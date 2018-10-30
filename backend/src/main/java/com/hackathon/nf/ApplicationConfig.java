@@ -16,7 +16,9 @@ import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.client.RestTemplate;
 
-import com.hackathon.nf.delegates.Hello;
+import com.hackathon.nf.delegates.DrinkService;
+import com.hackathon.nf.delegates.FoodService;
+import com.hackathon.nf.delegates.GenreService;
 
 @Configuration
 public class ApplicationConfig {
@@ -84,8 +86,18 @@ public class ApplicationConfig {
     }
     
     @Bean
-    public Hello hello(){
-        return new Hello();
+    public FoodService foodService(){
+        return new FoodService();
     }
+    @Bean
+    public DrinkService drinkService(){
+        return new DrinkService();
+    }
+    
+    @Bean
+    public GenreService genreService(){
+        return new GenreService();
+    }
+
 
 }
