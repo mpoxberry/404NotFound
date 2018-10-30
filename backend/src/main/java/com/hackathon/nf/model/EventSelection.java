@@ -1,34 +1,32 @@
 package com.hackathon.nf.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Data
 @Builder
-@ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class User {
+public class EventSelection {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
-    private String password;
-    private String emailAddress;
-    @ManyToMany
-    private List<Event> events;
+    @OneToOne
+    private Event event;
+    @OneToOne
+    private User user;
+    private String movie;
+    private String drink;
+    private String restaurant;
 
 }
