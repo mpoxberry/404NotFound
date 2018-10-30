@@ -6,15 +6,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Event {
@@ -22,9 +25,8 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String eventName;
-    private String movie;
-    private String drink;
-    private String restaurant;
-    @OneToMany(mappedBy = "event")
-    private List<User> particpants;
+    @ManyToMany(mappedBy = "events")
+    @Singular
+    private List<User> participants;
+
 }
