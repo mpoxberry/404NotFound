@@ -21,7 +21,8 @@ public class WorkflowController {
     @Autowired
     RestTemplate restTemplate;
     
-    CategorySelectionService service = new CategorySelectionService();
+    @Autowired
+    CategorySelectionService service;
 
     @RequestMapping("/start")
     public void start() {
@@ -46,6 +47,11 @@ public class WorkflowController {
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         service.saveUser(user);
+    }
+    
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public void getUser() {
+        service.findAllUsers();
     }
     
     @RequestMapping(value = "/event", method = RequestMethod.POST)
